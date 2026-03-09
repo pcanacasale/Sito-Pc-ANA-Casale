@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Area Riservata — PC ANA Casale Monferrato</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --verde:      #2d6a4f;
+  --verde-ch:   #52b788;
+  --verde-pale: #d8f3dc;
+  --blu:        #1a3a5c;
+  --blu-ch:     #2e6da4;
+  --blu-pale:   #dbeafe;
+  --giallo:     #f5c518;
+  --arancio:    #e07b39;
+  --crema:      #fdf8f0;
+  --bianco:     #ffffff;
+  --testo:      #2d3748;
+  --testo-ch:   #718096;
+  --ombra:      rgba(45,106,79,0.12);
+  --sidebar-w:  260px;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Nunito', sans-serif;
+  background: var(--crema);
+  color: var(--testo);
+  min-height: 100vh;
+}
+
+/* ── LOGIN SCREEN ── */
+#loginScreen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1a3a5c 0%, #2d6a4f 100%);
+  padding: 1.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+#loginScreen::before {
+  content: '';
+  position: absolute;
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.04);
+  top: -100px; right: -100px;
+}
+#loginScreen::after {
+  content: '';
+  position: absolute;
+  width: 300px; height: 300px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.03);
+  bottom: -80px; left: -80px;
+}
+
+.login-card {
+  background: var(--bianco);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 24px 60px rgba(0,0,0,0.25);
+  position: relative;
+  z-index: 1;
+}
+
+.login-logo {
+  text-align: center;
+  margin-bottom: 1.8rem;
+}
+.login-logo img {
+  height: 56px;
+  margin-bottom: 0.8rem;
+}
+.login-logo h1 {
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--blu);
+  line-height: 1.3;
+}
+.login-logo p {
+  font-size: 0.75rem;
+  color: var(--testo-ch);
+  margin-top: 0.2rem;
+}
+
+.login-card label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--testo-ch);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.4rem;
+  margin-top: 1rem;
+}
+.login-card input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  color: var(--testo);
+  transition: border-color 0.2s;
+  outline: none;
+}
+.login-card input:focus { border-color: var(--verde-ch); }
+
+.btn-login-submit {
+  width: 100%;
+  margin-top: 1.5rem;
+  padding: 0.85rem;
+  background: linear-gradient(90deg, var(--verde), var(--blu));
+  color: white;
+  border: none;
+  border-radius: 12px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 800;
+  cursor: pointer;
+  letter-spacing: 0.5px;
+  transition: opacity 0.2s, transform 0.1s;
+}
+.btn-login-submit:hover { opacity: 0.92; transform: translateY(-1px); }
+.btn-login-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+.login-error {
+  display: none;
+  margin-top: 0.8rem;
+  background: #fee2e2;
+  color: #991b1b;
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.back-link {
+  display: block;
+  text-align: center;
+  margin-top: 1.2rem;
+  font-size: 0.78rem;
+  color: var(--testo-ch);
+  text-decoration: none;
+}
+.back-link:hover { color: var(--verde); }
+
+/* ── DASHBOARD ── */
+#dashboard {
+  display: none;
+  min-height: 100vh;
+}
+
+/* Topbar */
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 60px;
+  background: var(--blu);
+  display: flex;
+  align-items: center;
+  padding: 0 1.5rem;
+  gap: 1rem;
+  z-index: 100;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+}
+.topbar-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  flex: 1;
+}
+.topbar-logo img { height: 32px; }
+.topbar-logo span {
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: white;
+  letter-spacing: 0.2px;
+}
+.topbar-welcome {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.7);
+}
+.topbar-welcome strong { color: white; }
+
+.btn-logout {
+  background: rgba(255,255,255,0.12);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.btn-logout:hover { background: rgba(255,255,255,0.22); }
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  top: 60px; left: 0; bottom: 0;
+  width: var(--sidebar-w);
+  background: var(--bianco);
+  border-right: 1px solid #e2e8f0;
+  padding: 1.5rem 0;
+  overflow-y: auto;
+  z-index: 90;
+}
+
+.sidebar-section {
+  padding: 0 1rem 0.5rem;
+  font-size: 0.65rem;
+  font-weight: 900;
+  color: var(--testo-ch);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 1rem;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.7rem 1.2rem;
+  margin: 0.1rem 0.6rem;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--testo);
+  transition: background 0.15s, color 0.15s;
+  border: none;
+  background: none;
+  width: calc(100% - 1.2rem);
+  text-align: left;
+}
+.nav-item:hover { background: var(--verde-pale); color: var(--verde); }
+.nav-item.active { background: var(--verde-pale); color: var(--verde); }
+.nav-item .icon { font-size: 1.1rem; flex-shrink: 0; }
+.nav-item .badge {
+  margin-left: auto;
+  background: #e11d48;
+  color: white;
+  border-radius: 20px;
+  padding: 1px 7px;
+  font-size: 0.65rem;
+  font-weight: 900;
+}
+
+/* Main content */
+.main {
+  margin-left: var(--sidebar-w);
+  padding-top: 60px;
+  min-height: 100vh;
+}
+
+.panel {
+  display: none;
+  padding: 2rem;
+  max-width: 900px;
+}
+.panel.active { display: block; }
+
+.panel-header {
+  margin-bottom: 1.8rem;
+}
+.panel-header h2 {
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: var(--blu);
+}
+.panel-header p {
+  font-size: 0.85rem;
+  color: var(--testo-ch);
+  margin-top: 0.2rem;
+}
+
+/* Cards home */
+.home-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+.home-card {
+  background: var(--bianco);
+  border-radius: 16px;
+  padding: 1.4rem;
+  border: 2px solid #e2e8f0;
+  cursor: pointer;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.15s;
+}
+.home-card:hover {
+  border-color: var(--verde-ch);
+  box-shadow: 0 4px 20px var(--ombra);
+  transform: translateY(-2px);
+}
+.home-card .card-icon { font-size: 2rem; margin-bottom: 0.7rem; }
+.home-card h3 { font-size: 0.9rem; font-weight: 800; color: var(--blu); margin-bottom: 0.3rem; }
+.home-card p { font-size: 0.75rem; color: var(--testo-ch); line-height: 1.5; }
+
+/* Utenti */
+.utente-row {
+  background: var(--bianco);
+  border-radius: 14px;
+  padding: 1rem 1.2rem;
+  margin-bottom: 0.7rem;
+  border: 2px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.utente-row.utente-disattivo { opacity: 0.5; }
+.utente-info { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
+.utente-info strong { font-size: 0.9rem; color: var(--blu); }
+.utente-username { font-size: 0.75rem; color: var(--testo-ch); font-weight: 600; }
+.utente-ruolo {
+  font-size: 0.7rem; font-weight: 700;
+  background: var(--verde-pale); color: var(--verde);
+  padding: 2px 8px; border-radius: 20px;
+}
+.utente-tipo {
+  font-size: 0.7rem; font-weight: 700; padding: 2px 8px; border-radius: 20px;
+}
+.utente-tipo.master { background: #fef3c7; color: #92400e; }
+.utente-tipo.standard { background: var(--blu-pale); color: var(--blu); }
+.utente-actions { display: flex; gap: 0.5rem; flex-shrink: 0; }
+
+/* Nuovo utente form */
+.new-user-form {
+  background: var(--bianco);
+  border-radius: 16px;
+  padding: 1.5rem;
+  border: 2px dashed #c8d6e5;
+  margin-top: 1.5rem;
+}
+.new-user-form h3 {
+  font-size: 0.9rem; font-weight: 800; color: var(--blu);
+  margin-bottom: 1rem;
+}
+.form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem;
+  margin-bottom: 0.7rem;
+}
+.new-user-form input, .new-user-form select {
+  width: 100%;
+  padding: 0.65rem 0.9rem;
+  border: 2px solid #e2e8f0;
+  border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.82rem;
+  color: var(--testo);
+  outline: none;
+  transition: border-color 0.2s;
+}
+.new-user-form input:focus, .new-user-form select:focus { border-color: var(--verde-ch); }
+.form-err {
+  display: none;
+  font-size: 0.78rem; font-weight: 700;
+  background: #fee2e2; color: #991b1b;
+  padding: 0.5rem 0.8rem; border-radius: 8px;
+  margin-bottom: 0.7rem;
+}
+
+/* Richieste */
+.richiesta-card {
+  background: var(--bianco);
+  border-radius: 14px;
+  padding: 1.2rem 1.4rem;
+  margin-bottom: 0.8rem;
+  border: 2px solid #e2e8f0;
+  border-left-width: 4px;
+}
+.richiesta-card.nuova { border-left-color: var(--blu); background: #f0f6ff; }
+.richiesta-card.letta { border-left-color: #c8d6e5; }
+.richiesta-top {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  margin-bottom: 0.6rem;
+}
+.richiesta-nome { font-size: 0.95rem; font-weight: 800; color: var(--blu); }
+.richiesta-data { font-size: 0.72rem; color: var(--testo-ch); }
+.badge-nuova {
+  font-size: 0.62rem; font-weight: 900;
+  background: var(--blu); color: white;
+  border-radius: 10px; padding: 1px 7px; margin-left: 6px;
+}
+.richiesta-body { font-size: 0.82rem; color: var(--testo-ch); line-height: 1.7; }
+.richiesta-msg { font-style: italic; margin-top: 0.3rem; }
+.richiesta-actions { display: flex; gap: 0.5rem; margin-top: 0.8rem; }
+
+/* Iframe Teable */
+.teable-frame {
+  width: 100%;
+  height: calc(100vh - 140px);
+  border: none;
+  border-radius: 16px;
+  background: white;
+  box-shadow: 0 2px 12px var(--ombra);
+}
+
+/* Buttons */
+.btn-sm {
+  padding: 0.3rem 0.8rem;
+  border: none; border-radius: 8px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.72rem; font-weight: 800;
+  cursor: pointer; transition: opacity 0.15s;
+}
+.btn-sm:hover { opacity: 0.8; }
+.btn-ok { background: var(--verde-pale); color: var(--verde); }
+.btn-warn { background: #fef3c7; color: #92400e; }
+.btn-danger { background: #fee2e2; color: #991b1b; }
+.btn-primary {
+  padding: 0.65rem 1.4rem;
+  background: linear-gradient(90deg, var(--verde), var(--blu));
+  color: white; border: none; border-radius: 10px;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.82rem; font-weight: 800;
+  cursor: pointer; transition: opacity 0.2s;
+}
+.btn-primary:hover { opacity: 0.88; }
+
+/* Mobile */
+@media (max-width: 700px) {
+  .sidebar { transform: translateX(-100%); transition: transform 0.25s; }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; }
+  .panel { padding: 1.2rem; }
+  .form-grid { grid-template-columns: 1fr; }
+  .topbar-welcome { display: none; }
+  .hamburger-btn {
+    display: flex !important;
+    flex-direction: column; gap: 4px;
+    background: none; border: none; cursor: pointer; padding: 4px;
+  }
+  .hamburger-btn span {
+    display: block; width: 20px; height: 2px;
+    background: white; border-radius: 2px;
+  }
+}
+.hamburger-btn { display: none; }
+</style>
+</head>
+<body>
+
+<!-- ── LOGIN ── -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="images/logo-ana.gif" alt="Logo ANA" onerror="this.style.display='none'">
+      <h1>PC ANA Casale Monferrato</h1>
+      <p>Area Riservata — accesso volontari</p>
+    </div>
+    <label>Username</label>
+    <input type="text" id="loginUser" placeholder="Il tuo username" autocomplete="username">
+    <label>Password</label>
+    <input type="password" id="loginPass" placeholder="••••••••" autocomplete="current-password">
+    <button class="btn-login-submit" id="btnLogin" onclick="doLogin()">Accedi</button>
+    <div class="login-error" id="loginError"></div>
+    <a href="index.html" class="back-link">← Torna al sito</a>
+  </div>
+</div>
+
+<!-- ── DASHBOARD ── -->
+<div id="dashboard">
+
+  <!-- Topbar -->
+  <div class="topbar">
+    <button class="hamburger-btn" onclick="toggleSidebar()">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="topbar-logo">
+      <img src="images/logo-ana.gif" alt="Logo" onerror="this.style.display='none'">
+      <span>PC ANA Casale — Area Riservata</span>
+    </div>
+    <div class="topbar-welcome" id="topbarWelcome"></div>
+    <button class="btn-logout" onclick="logout()">Esci</button>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="sidebar" id="sidebar">
+    <div class="sidebar-section">Generale</div>
+    <button class="nav-item active" onclick="showPanel('home', this)">
+      <span class="icon">🏠</span> Home
+    </button>
+
+    <div class="sidebar-section">Operativo</div>
+    <button class="nav-item" onclick="showPanel('interventi', this)">
+      <span class="icon">📋</span> Interventi
+    </button>
+    <button class="nav-item" onclick="showPanel('volontari', this)">
+      <span class="icon">👤</span> Elenco volontari
+    </button>
+
+    <div id="masterNav" style="display:none">
+      <div class="sidebar-section">Master</div>
+      <button class="nav-item" onclick="showPanel('richieste', this)">
+        <span class="icon">📬</span> Richieste adesione
+        <span class="badge" id="badgeRichieste" style="display:none"></span>
+      </button>
+      <button class="nav-item" onclick="showPanel('utenti', this)">
+        <span class="icon">👥</span> Gestione utenti
+      </button>
+    </div>
+  </div>
+
+  <!-- Main -->
+  <div class="main">
+
+    <!-- HOME -->
+    <div class="panel active" id="panelHome">
+      <div class="panel-header">
+        <h2 id="homeWelcome">Benvenuto</h2>
+        <p>Seleziona una sezione dalla barra laterale</p>
+      </div>
+      <div class="home-cards" id="homeCards">
+        <div class="home-card" onclick="showPanel('interventi', null)">
+          <div class="card-icon">📋</div>
+          <h3>Interventi</h3>
+          <p>Registra e consulta gli interventi dell'unità</p>
+        </div>
+        <div class="home-card" onclick="showPanel('volontari', null)">
+          <div class="card-icon">👤</div>
+          <h3>Elenco volontari</h3>
+          <p>Visualizza i dati dei volontari attivi</p>
+        </div>
+      </div>
+      <div id="masterCards" style="display:none">
+        <div class="home-cards">
+          <div class="home-card" onclick="showPanel('richieste', null)">
+            <div class="card-icon">📬</div>
+            <h3>Richieste adesione</h3>
+            <p>Gestisci le richieste ricevute dal sito</p>
+          </div>
+          <div class="home-card" onclick="showPanel('utenti', null)">
+            <div class="card-icon">👥</div>
+            <h3>Gestione utenti</h3>
+            <p>Aggiungi, modifica o rimuovi volontari</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INTERVENTI -->
+    <div class="panel" id="panelInterventi">
+      <div class="panel-header">
+        <h2>📋 Interventi</h2>
+        <p>Inserimento e consultazione interventi</p>
+      </div>
+      <iframe class="teable-frame" src="https://app.teable.ai/share/shrm9NARRyXGOaT1L6c/view"></iframe>
+    </div>
+
+    <!-- VOLONTARI -->
+    <div class="panel" id="panelVolontari">
+      <div class="panel-header">
+        <h2>👤 Elenco volontari</h2>
+        <p>Lista aggiornata dei volontari dell'unità</p>
+      </div>
+      <iframe class="teable-frame" src="https://app.teable.ai/share/shre0oZ3AUhA6RnhPVi/view"></iframe>
+    </div>
+
+    <!-- RICHIESTE (master) -->
+    <div class="panel" id="panelRichieste">
+      <div class="panel-header">
+        <h2>📬 Richieste di adesione</h2>
+        <p>Richieste ricevute dal modulo sul sito</p>
+      </div>
+      <div id="richiesteList"></div>
+    </div>
+
+    <!-- UTENTI (master) -->
+    <div class="panel" id="panelUtenti">
+      <div class="panel-header">
+        <h2>👥 Gestione utenti</h2>
+        <p>Aggiungi, attiva o rimuovi gli accessi</p>
+      </div>
+      <div id="utentiList"></div>
+      <div class="new-user-form">
+        <h3>+ Nuovo utente</h3>
+        <div class="form-err" id="nuovoUtenteErr"></div>
+        <div class="form-grid">
+          <input type="text" id="nuovoNome" placeholder="Nome e Cognome *">
+          <input type="text" id="nuovoUsername" placeholder="Username *">
+          <input type="password" id="nuovaPassword" placeholder="Password *">
+          <input type="text" id="nuovoRuolo" placeholder="Ruolo (es. Coordinatore)">
+        </div>
+        <div style="margin-bottom:0.8rem">
+          <select id="nuovoTipo" style="width:100%;padding:0.65rem 0.9rem;border:2px solid #e2e8f0;border-radius:10px;font-family:'Nunito',sans-serif;font-size:0.82rem">
+            <option value="standard">Standard</option>
+            <option value="master">Master</option>
+          </select>
+        </div>
+        <button class="btn-primary" onclick="salvaUtente()">Salva utente</button>
+      </div>
+    </div>
+
+  </div><!-- /main -->
+</div><!-- /dashboard -->
+
+<script>
+const SUPA_URL = 'https://pggtmyarpuztfewqgwyc.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnZ3RteWFycHV6dGZld3Fnd3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwNDk4MjksImV4cCI6MjA4ODYyNTgyOX0.NqhNcmN-tqv5XWyeokSkjvOM6PxnmlDtZNcADeHRp9c';
+let currentUser = null;
+const H = { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY };
+const HJ = { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY, 'Content-Type': 'application/json' };
+
+// ── LOGIN ──
+async function doLogin() {
+  const u = document.getElementById('loginUser').value.trim();
+  const p = document.getElementById('loginPass').value.trim();
+  const err = document.getElementById('loginError');
+  const btn = document.getElementById('btnLogin');
+  if (!u || !p) { err.textContent = 'Inserisci username e password.'; err.style.display = 'block'; return; }
+  err.style.display = 'none';
+  btn.disabled = true; btn.textContent = 'Accesso in corso...';
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/utenti?username=eq.' + encodeURIComponent(u) + '&password=eq.' + encodeURIComponent(p) + '&attivo=eq.true&select=id,nome,ruolo,tipo_accesso', { headers: H });
+    const data = await res.json();
+    if (data && data.length > 0) {
+      currentUser = data[0];
+      avviaDashboard();
+    } else {
+      err.textContent = 'Credenziali non corrette. Riprova.'; err.style.display = 'block';
+    }
+  } catch(e) {
+    err.textContent = 'Errore di connessione. Riprova.'; err.style.display = 'block';
+  }
+  btn.disabled = false; btn.textContent = 'Accedi';
+}
+
+function avviaDashboard() {
+  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  document.getElementById('topbarWelcome').innerHTML = 'Ciao <strong>' + currentUser.nome + '</strong> &mdash; ' + currentUser.ruolo;
+  document.getElementById('homeWelcome').textContent = 'Benvenuto, ' + currentUser.nome + '!';
+  if (currentUser.tipo_accesso === 'master') {
+    document.getElementById('masterNav').style.display = 'block';
+    document.getElementById('masterCards').style.display = 'block';
+    caricaBadgeRichieste();
+  }
+}
+
+function logout() {
+  currentUser = null;
+  document.getElementById('loginScreen').style.display = 'flex';
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('loginUser').value = '';
+  document.getElementById('loginPass').value = '';
+  // Reset panels
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.getElementById('panelHome').classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
+  document.querySelector('.nav-item').classList.add('active');
+}
+
+// ── NAVIGAZIONE ──
+function showPanel(name, btn) {
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.nav-item').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById('panel' + name.charAt(0).toUpperCase() + name.slice(1)).classList.add('active');
+  if (btn) btn.classList.add('active');
+  // chiudi sidebar su mobile
+  document.getElementById('sidebar').classList.remove('open');
+  // carica dati se necessario
+  if (name === 'utenti') caricaUtenti();
+  if (name === 'richieste') caricaRichieste();
+}
+
+function toggleSidebar() {
+  document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ── GESTIONE UTENTI ──
+async function caricaUtenti() {
+  const list = document.getElementById('utentiList');
+  list.innerHTML = '<p style="color:var(--testo-ch);padding:1rem 0">Caricamento...</p>';
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/utenti?select=id,nome,username,ruolo,tipo_accesso,attivo&order=nome', { headers: H });
+    const utenti = await res.json();
+    list.innerHTML = '';
+    utenti.forEach(function(u) {
+      const div = document.createElement('div');
+      div.className = 'utente-row' + (u.attivo ? '' : ' utente-disattivo');
+      const tipoLabel = u.tipo_accesso === 'master' ? '⭐ Master' : '👤 Standard';
+      div.innerHTML = '<div class="utente-info">'
+        + '<strong>' + u.nome + '</strong>'
+        + '<span class="utente-username">@' + u.username + '</span>'
+        + '<span class="utente-ruolo">' + u.ruolo + '</span>'
+        + '<span class="utente-tipo ' + u.tipo_accesso + '">' + tipoLabel + '</span>'
+        + '</div>'
+        + '<div class="utente-actions">'
+        + '<button class="btn-sm ' + (u.attivo ? 'btn-warn' : 'btn-ok') + '" onclick="toggleAttivo(' + JSON.stringify(u.id) + ',' + JSON.stringify(u.attivo) + ')">' + (u.attivo ? 'Disattiva' : 'Attiva') + '</button>'
+        + '<button class="btn-sm btn-danger" onclick="eliminaUtente(' + JSON.stringify(u.id) + ',' + JSON.stringify(u.nome) + ')">Elimina</button>'
+        + '</div>';
+      list.appendChild(div);
+    });
+  } catch(e) { list.innerHTML = '<p style="color:red">Errore caricamento utenti.</p>'; }
+}
+
+async function salvaUtente() {
+  const nome = document.getElementById('nuovoNome').value.trim();
+  const username = document.getElementById('nuovoUsername').value.trim();
+  const password = document.getElementById('nuovaPassword').value.trim();
+  const ruolo = document.getElementById('nuovoRuolo').value.trim();
+  const tipo_accesso = document.getElementById('nuovoTipo').value;
+  const errEl = document.getElementById('nuovoUtenteErr');
+  if (!nome || !username || !password || !ruolo) { errEl.textContent = 'Compila tutti i campi.'; errEl.style.display = 'block'; return; }
+  errEl.style.display = 'none';
+  const res = await fetch(SUPA_URL + '/rest/v1/utenti', {
+    method: 'POST',
+    headers: Object.assign({}, HJ, { 'Prefer': 'return=minimal' }),
+    body: JSON.stringify({ nome: nome, username: username, password: password, ruolo: ruolo, tipo_accesso: tipo_accesso })
+  });
+  if (res.ok) {
+    document.getElementById('nuovoNome').value = '';
+    document.getElementById('nuovoUsername').value = '';
+    document.getElementById('nuovaPassword').value = '';
+    document.getElementById('nuovoRuolo').value = '';
+    caricaUtenti();
+  } else { errEl.textContent = 'Errore. Username già esistente?'; errEl.style.display = 'block'; }
+}
+
+async function toggleAttivo(id, attivo) {
+  await fetch(SUPA_URL + '/rest/v1/utenti?id=eq.' + id, { method: 'PATCH', headers: HJ, body: JSON.stringify({ attivo: !attivo }) });
+  caricaUtenti();
+}
+
+async function eliminaUtente(id, nome) {
+  if (!confirm('Eliminare definitivamente ' + nome + '?')) return;
+  await fetch(SUPA_URL + '/rest/v1/utenti?id=eq.' + id, { method: 'DELETE', headers: H });
+  caricaUtenti();
+}
+
+// ── RICHIESTE ──
+async function caricaBadgeRichieste() {
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/richieste_adesione?letta=eq.false&select=id', { headers: H });
+    const data = await res.json();
+    const badge = document.getElementById('badgeRichieste');
+    if (data.length > 0) { badge.textContent = data.length; badge.style.display = 'inline'; }
+    else { badge.style.display = 'none'; }
+  } catch(e) {}
+}
+
+async function caricaRichieste() {
+  const list = document.getElementById('richiesteList');
+  list.innerHTML = '<p style="color:var(--testo-ch);padding:1rem 0">Caricamento...</p>';
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/richieste_adesione?select=*&order=created_at.desc', { headers: H });
+    const richieste = await res.json();
+    const nonLette = richieste.filter(function(r) { return !r.letta; }).length;
+    const badge = document.getElementById('badgeRichieste');
+    if (nonLette > 0) { badge.textContent = nonLette; badge.style.display = 'inline'; }
+    else { badge.style.display = 'none'; }
+    if (!richieste.length) { list.innerHTML = '<p style="color:var(--testo-ch);padding:1rem 0">Nessuna richiesta ricevuta.</p>'; return; }
+    list.innerHTML = '';
+    richieste.forEach(function(r) {
+      const data = new Date(r.created_at).toLocaleDateString('it-IT', { day: '2-digit', month: '2-digit', year: 'numeric' });
+      const div = document.createElement('div');
+      div.className = 'richiesta-card ' + (r.letta ? 'letta' : 'nuova');
+      const tag = r.letta ? '' : '<span class="badge-nuova">NUOVA</span>';
+      const socio = r.socio_ana ? '<div>Socio ANA: ' + r.socio_ana + (r.gruppo_ana ? ' — ' + r.gruppo_ana : '') + '</div>' : '';
+      const msg = r.messaggio ? '<div class="richiesta-msg">"' + r.messaggio + '"</div>' : '';
+      const tel = r.telefono ? ' &middot; ' + r.telefono : '';
+      const btnL = r.letta
+        ? '<span style="font-size:0.75rem;color:#aaa">&#10003; Letta</span>'
+        : '<button class="btn-sm btn-ok" onclick="segnaLetta(' + JSON.stringify(r.id) + ')">Segna come letta</button>';
+      const btnE = '<button class="btn-sm btn-danger" onclick="eliminaRichiesta(' + JSON.stringify(r.id) + ')">Elimina</button>';
+      div.innerHTML = '<div class="richiesta-top">'
+        + '<div><span class="richiesta-nome">' + r.nome + '</span>' + tag + '</div>'
+        + '<span class="richiesta-data">' + data + '</span></div>'
+        + '<div class="richiesta-body"><div>' + r.email + tel + '</div>' + socio + msg + '</div>'
+        + '<div class="richiesta-actions">' + btnL + btnE + '</div>';
+      list.appendChild(div);
+    });
+  } catch(e) { list.innerHTML = '<p style="color:red">Errore caricamento.</p>'; }
+}
+
+async function segnaLetta(id) {
+  await fetch(SUPA_URL + '/rest/v1/richieste_adesione?id=eq.' + id, { method: 'PATCH', headers: HJ, body: JSON.stringify({ letta: true }) });
+  caricaRichieste();
+}
+
+async function eliminaRichiesta(id) {
+  if (!confirm('Eliminare questa richiesta?')) return;
+  await fetch(SUPA_URL + '/rest/v1/richieste_adesione?id=eq.' + id, { method: 'DELETE', headers: H });
+  caricaRichieste();
+}
+
+// ── KEYBOARD ──
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Enter' && document.getElementById('loginScreen').style.display !== 'none') doLogin();
+});
+</script>
+</body>
+</html>
