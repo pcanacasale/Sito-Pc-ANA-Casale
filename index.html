@@ -301,6 +301,7 @@ section { padding:5rem 2rem; }
   border-left:3px solid var(--blu-ch); padding-left:0.9rem; margin:0;
 }
 .photo-placeholder {
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
   width:100%; height:130px;
   display:flex; align-items:center; justify-content:center;
   font-size:0.8rem; font-weight:800; letter-spacing:1px;
@@ -371,6 +372,13 @@ section { padding:5rem 2rem; }
 .gallery-slot:hover { background:linear-gradient(135deg, #a5d6a7, #90caf9); border-style:solid; }
 .gallery-slot span { font-size:2rem; opacity:0.5; }
 .gallery-slot p { font-size:0.7rem; font-weight:800; letter-spacing:1px; color:var(--verde); text-transform:uppercase; }
+.gallery-slot img {
+  width:100%; height:100%; object-fit:cover; border-radius:14px;
+}
+.slot-empty {
+  display:none; flex-direction:column; align-items:center; justify-content:center;
+  gap:0.5rem; width:100%; height:100%;
+}
 .slot-large {
   grid-column: span 2;
   grid-row: span 2;
@@ -624,8 +632,8 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
           <h3>Un gruppo di persone ordinarie,<br>capaci di cose straordinarie</h3>
         </div>
         <div class="story-photos">
-          <div class="photo-placeholder">📷 FOTO-A1</div>
-          <div class="photo-placeholder">📷 FOTO-A2</div>
+          <img src="images/foto-A1.jpg" alt="Volontari in campo" onerror="this.parentElement.innerHTML='<div class=\"photo-placeholder\">📷 FOTO-A1</div>'">
+          <img src="images/foto-A2.jpg" alt="Mezzi e attrezzature" onerror="this.parentElement.innerHTML='<div class=\"photo-placeholder\">📷 FOTO-A2</div>'">
         </div>
         <div class="story-body">
           <p>Dal 2001, anno di fondazione dell'Unità di PC della Sezione di Casale, i volontari sono di supporto alla popolazione in caso di emergenza pubblica.</p>
@@ -640,8 +648,8 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
           <h3>Ciao, lo sai cos'è la<br>Protezione Civile ANA?</h3>
         </div>
         <div class="story-photos">
-          <div class="photo-placeholder">📷 FOTO-B1</div>
-          <div class="photo-placeholder">📷 FOTO-B2</div>
+          <img src="images/foto-B1.jpg" alt="Volontari in esercitazione" onerror="this.parentElement.innerHTML='<div class=\"photo-placeholder\">📷 FOTO-B1</div>'">
+          <img src="images/foto-B2.jpg" alt="Squadra operativa" onerror="this.parentElement.innerHTML='<div class=\"photo-placeholder\">📷 FOTO-B2</div>'">
         </div>
         <div class="story-body">
           <p>La Protezione Civile dell'ANA nasce in pratica all'inizio degli anni '80. Dal 2001, i volontari della Sezione di Casale sono al fianco della popolazione nelle emergenze.</p>
@@ -656,8 +664,8 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
           <h3>Pandemia di COVID-19:<br>un'emergenza fuori dal comune</h3>
         </div>
         <div class="story-photos">
-          <div class="photo-placeholder">📷 FOTO-C1</div>
-          <div class="photo-placeholder">📷 FOTO-C2</div>
+          <img src="images/foto-C1.jpg" alt="Operatori con DPI" onerror="this.parentElement.innerHTML='<div class=\"photo-placeholder\">📷 FOTO-C1</div>'">
+          <img src="images/foto-C2.jpg" alt="Distribuzione mascherine" onerror="this.parentElement.innerHTML='<div class=\"photo-placeholder\">📷 FOTO-C2</div>'">
         </div>
         <div class="story-body">
           <p>Il 2020 ci ha aperto gli occhi su un tipo di emergenza a noi sconosciuto. I volontari hanno dato supporto alle Amministrazioni Locali e alla cittadinanza, gestendo la consegna dei DPI presso le RSA del territorio.</p>
@@ -677,14 +685,38 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
     <h2 class="section-h2">Galleria <span>fotografica</span></h2>
     <p class="section-lead">Dalla fondazione del 2001 ai giorni nostri: esercitazioni, interventi d'emergenza e la quotidianità dei volontari.</p>
     <div class="gallery-grid">
-      <div class="gallery-slot slot-large"><span>📷</span><p>FOTO-1</p></div>
-      <div class="gallery-slot"><span>📷</span><p>FOTO-2</p></div>
-      <div class="gallery-slot"><span>📷</span><p>FOTO-3</p></div>
-      <div class="gallery-slot"><span>📷</span><p>FOTO-4</p></div>
-      <div class="gallery-slot"><span>📷</span><p>FOTO-5</p></div>
-      <div class="gallery-slot"><span>📷</span><p>FOTO-6</p></div>
-      <div class="gallery-slot"><span>📷</span><p>FOTO-7</p></div>
-      <div class="gallery-slot"><span>📷</span><p>FOTO-8</p></div>
+      <div class="gallery-slot slot-large">
+        <img src="images/galleria-1.jpg" alt="Foto 1" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slot-empty"><span>📷</span><p>FOTO-1</p></div>
+      </div>
+      <div class="gallery-slot">
+        <img src="images/galleria-2.jpg" alt="Foto 2" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slot-empty"><span>📷</span><p>FOTO-2</p></div>
+      </div>
+      <div class="gallery-slot">
+        <img src="images/galleria-3.jpg" alt="Foto 3" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slot-empty"><span>📷</span><p>FOTO-3</p></div>
+      </div>
+      <div class="gallery-slot">
+        <img src="images/galleria-4.jpg" alt="Foto 4" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slot-empty"><span>📷</span><p>FOTO-4</p></div>
+      </div>
+      <div class="gallery-slot">
+        <img src="images/galleria-5.jpg" alt="Foto 5" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slot-empty"><span>📷</span><p>FOTO-5</p></div>
+      </div>
+      <div class="gallery-slot">
+        <img src="images/galleria-6.jpg" alt="Foto 6" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slot-empty"><span>📷</span><p>FOTO-6</p></div>
+      </div>
+      <div class="gallery-slot">
+        <img src="images/galleria-7.jpg" alt="Foto 7" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slot-empty"><span>📷</span><p>FOTO-7</p></div>
+      </div>
+      <div class="gallery-slot">
+        <img src="images/galleria-8.jpg" alt="Foto 8" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slot-empty"><span>📷</span><p>FOTO-8</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -805,13 +837,18 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
       <div class="fi"><input type="text" id="loginUser" placeholder="Utente"></div>
       <div class="fi"><input type="password" id="loginPass" placeholder="Password"></div>
       <button class="btn-submit" onclick="doLogin()">Accedi</button>
-      <p style="font-size:0.75rem;color:var(--testo-ch);margin-top:1rem;text-align:center;">
-        Problemi di accesso? Contatta il responsabile dell'Unità.
-      </p>
+      <div id="loginSpinner" style="display:none;text-align:center;margin-top:1rem;color:var(--testo-ch);font-size:0.85rem;">⏳ Accesso in corso...</div>
     </div>
     <div id="areaInterna" class="modal-area">
       <div class="modal-badge" style="background:var(--verde-pale);color:var(--verde)">✅ Benvenuto/a!</div>
-      <h2 style="margin-bottom:1.2rem">Area Volontari</h2>
+      <h2 style="margin-bottom:0.3rem">Area Volontari</h2>
+      <p style="font-size:0.8rem;color:var(--testo-ch);margin-bottom:1.2rem" id="welcomeMsg"></p>
+      <div id="masterMenu" style="display:none">
+        <div class="area-card" onclick="alert('In costruzione: Gestione Utenti')">
+          <h4>👥 Gestione utenti</h4>
+          <p>Aggiungi, modifica o rimuovi volontari</p>
+        </div>
+      </div>
       <div class="area-card" onclick="alert('In costruzione: Calendario Turni')">
         <h4>📅 Calendario turni & eventi</h4>
         <p>Esercitazioni, turni di servizio, 25° anniversario</p>
@@ -834,25 +871,80 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
 </div>
 
 <script>
-function openModal(){document.getElementById('loginModal').classList.add('active');document.body.style.overflow='hidden';}
-function closeModal(){document.getElementById('loginModal').classList.remove('active');document.body.style.overflow='';}
-function doLogin(){
-  var u=document.getElementById('loginUser').value.trim();
-  var p=document.getElementById('loginPass').value.trim();
-  if(u==='volontario'&&p==='alpini2026'){
-    document.getElementById('loginForm').classList.remove('active');
-    document.getElementById('areaInterna').classList.add('active');
-    document.getElementById('loginError').style.display='none';
-  }else{document.getElementById('loginError').style.display='block';}
+const SUPA_URL = 'https://pggtmyarpuztfewqgwyc.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnZ3RteWFycHV6dGZld3Fnd3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwNDk4MjksImV4cCI6MjA4ODYyNTgyOX0.NqhNcmN-tqv5XWyeokSkjvOM6PxnmlDtZNcADeHRp9c';
+
+let currentUser = null;
+
+function openModal(){
+  document.getElementById('loginModal').classList.add('active');
+  document.body.style.overflow='hidden';
 }
+function closeModal(){
+  document.getElementById('loginModal').classList.remove('active');
+  document.body.style.overflow='';
+}
+
+async function doLogin(){
+  const username = document.getElementById('loginUser').value.trim();
+  const password = document.getElementById('loginPass').value.trim();
+  const errorEl = document.getElementById('loginError');
+  const spinner = document.getElementById('loginSpinner');
+
+  if(!username || !password){
+    errorEl.style.display='block';
+    errorEl.textContent='⚠️ Inserisci utente e password.';
+    return;
+  }
+
+  errorEl.style.display='none';
+  spinner.style.display='block';
+  document.querySelector('#loginForm .btn-submit').disabled = true;
+
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/utenti?username=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(password)}&attivo=eq.true&select=id,nome,ruolo`, {
+      headers: {
+        'apikey': SUPA_KEY,
+        'Authorization': `Bearer ${SUPA_KEY}`
+      }
+    });
+    const data = await res.json();
+
+    if(data && data.length > 0){
+      currentUser = data[0];
+      document.getElementById('loginForm').classList.remove('active');
+      document.getElementById('areaInterna').classList.add('active');
+      document.getElementById('welcomeMsg').textContent = `Ciao ${currentUser.nome}! Ruolo: ${currentUser.ruolo === 'master' ? '⭐ Master' : '👤 Standard'}`;
+      document.getElementById('masterMenu').style.display = currentUser.ruolo === 'master' ? 'block' : 'none';
+    } else {
+      errorEl.style.display='block';
+      errorEl.textContent='⚠️ Credenziali non corrette. Riprova.';
+    }
+  } catch(e) {
+    errorEl.style.display='block';
+    errorEl.textContent='⚠️ Errore di connessione. Riprova.';
+  }
+
+  spinner.style.display='none';
+  document.querySelector('#loginForm .btn-submit').disabled = false;
+}
+
 function logout(){
+  currentUser = null;
   document.getElementById('areaInterna').classList.remove('active');
   document.getElementById('loginForm').classList.add('active');
   document.getElementById('loginUser').value='';
   document.getElementById('loginPass').value='';
   closeModal();
 }
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+
+document.addEventListener('keydown', function(e){
+  if(e.key==='Escape') closeModal();
+  if(e.key==='Enter' && document.getElementById('loginModal').classList.contains('active')){
+    if(document.getElementById('loginForm').classList.contains('active')) doLogin();
+  }
+});
 </script>
+</body>
 </body>
 </html>
