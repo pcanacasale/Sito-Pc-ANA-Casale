@@ -355,35 +355,27 @@ section { padding:5rem 2rem; }
 
 /* ───── GALLERIA ───── */
 #galleria { background:linear-gradient(160deg, var(--verde-pale), var(--crema)); }
-.gall-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:1rem; }
-.gall-item {
-  border-radius:16px; overflow:hidden; aspect-ratio:1;
-  display:flex; align-items:center; justify-content:center;
-  font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:1px;
-  color:rgba(255,255,255,0.6); transition:transform 0.25s;
-  position:relative;
+.gallery-grid {
+  display:grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap:1rem;
 }
-.gall-item:nth-child(1) { grid-column:span 2; grid-row:span 2; aspect-ratio:auto; min-height:260px; }
-.gall-item:hover { transform:scale(1.02); }
-.gall-i1 { background:linear-gradient(135deg, #2d6a4f, #1a3a5c); }
-.gall-i2 { background:linear-gradient(135deg, #1a3a5c, #2e6da4); }
-.gall-i3 { background:linear-gradient(135deg, #52b788, #2d6a4f); }
-.gall-i4 { background:linear-gradient(135deg, #e07b39, #c8501a); }
-.gall-i5 { background:linear-gradient(135deg, #2e6da4, #1a3a5c); }
-.gall-i6 { background:linear-gradient(135deg, #f5c518, #e07b39); }
-.gall-label {
-  position:absolute; bottom:0; left:0; right:0;
-  background:linear-gradient(transparent, rgba(0,0,0,0.5));
-  padding:1.5rem 1rem 0.8rem;
-  font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:1px;
-  color:rgba(255,255,255,0.9); text-align:center;
+.gallery-slot {
+  background:linear-gradient(135deg, #c8e6c9, #bbdefb);
+  border-radius:16px; border:2px dashed rgba(45,106,79,0.3);
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:0.5rem; min-height:160px; cursor:pointer;
+  transition:all 0.22s;
 }
-.gall-note {
-  margin-top:1.5rem; background:var(--bianco); border-radius:16px;
-  padding:1.2rem 1.8rem; display:flex; align-items:center; gap:1rem;
-  box-shadow:0 4px 16px rgba(0,0,0,0.06);
+.gallery-slot:hover { background:linear-gradient(135deg, #a5d6a7, #90caf9); border-style:solid; }
+.gallery-slot span { font-size:2rem; opacity:0.5; }
+.gallery-slot p { font-size:0.7rem; font-weight:800; letter-spacing:1px; color:var(--verde); text-transform:uppercase; }
+.slot-large {
+  grid-column: span 2;
+  grid-row: span 2;
+  min-height:340px;
 }
-.gall-note p { font-size:0.85rem; color:var(--testo-ch); line-height:1.6; }
 
 /* ───── ADERIRE ───── */
 #aderire { background:var(--bianco); }
@@ -540,7 +532,6 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
   <ul class="nav-links">
     <li><a href="#chi-siamo">Chi Siamo</a></li>
     <li><a href="#rollup">Le nostre storie</a></li>
-    <li><a href="#attivita">Attività</a></li>
     <li><a href="#galleria">Galleria</a></li>
     <li><a href="#aderire">Aderire</a></li>
     <li><a href="#contatti">Contatti</a></li>
@@ -679,78 +670,21 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
   </div>
 </section>
 
-<!-- ATTIVITÀ -->
-<section id="attivita">
-  <div class="container">
-    <div class="section-tag">⚙️ Cosa facciamo</div>
-    <h2 class="section-h2">Attività e <span>interventi</span></h2>
-    <p class="section-lead">Dalle esercitazioni annuali alle grandi emergenze nazionali, i nostri volontari sono sempre pronti a intervenire.</p>
-    <div class="att-grid">
-      <div class="att-card">
-        <div class="att-icon">🌊</div>
-        <h3>Alluvioni & piena del Po</h3>
-        <p>Sorveglianza arginale, interventi in caso di esondazione, sgombero e supporto. Accordo con il Comune di Casale dal 2003.</p>
-      </div>
-      <div class="att-card">
-        <div class="att-icon">🏕️</div>
-        <h3>Campo base & logistica</h3>
-        <p>Allestimento tende, cucina da campo, gestione magazzino e mezzi. Fuoristrada, motopompe, motoseghe.</p>
-      </div>
-      <div class="att-card">
-        <div class="att-icon">📡</div>
-        <h3>Radio & comunicazioni</h3>
-        <p>Squadra specializzata in apparati radio e coordinamento con le autorità in situazioni di emergenza.</p>
-      </div>
-      <div class="att-card">
-        <div class="att-icon">🏥</div>
-        <h3>Squadra sanitaria</h3>
-        <p>Unica organizzazione in provincia con autosoccorso medico: medici specializzati e infermieri professionali.</p>
-      </div>
-      <div class="att-card">
-        <div class="att-icon">🔥</div>
-        <h3>Antincendio boschivo</h3>
-        <p>Prevenzione incendi, piste tagliafuoco e supporto nelle emergenze in collaborazione con la Regione Piemonte.</p>
-      </div>
-      <div class="att-card">
-        <div class="att-icon">🎽</div>
-        <h3>Esercitazioni annuali</h3>
-        <p>1° Raggruppamento ANA (Piemonte, Liguria, Valle d'Aosta), esercitazioni comunali "Insieme" e "Po".</p>
-      </div>
-    </div>
-    <div class="spec-row">
-      <span class="spec-badge">📻 Operatori radio</span>
-      <span class="spec-badge">🪚 Motoseghisti</span>
-      <span class="spec-badge">🍳 Cucina da campo</span>
-      <span class="spec-badge">🚗 Autisti</span>
-      <span class="spec-badge">💊 Sanitari</span>
-      <span class="spec-badge">🏗️ Operai qualificati</span>
-    </div>
-    <div class="ore-row">
-      <div class="ore-card"><div class="ore-num">325</div><div class="ore-lbl">H/Uomo 2001</div></div>
-      <div class="ore-card"><div class="ore-num">3.670</div><div class="ore-lbl">H/Uomo 2003</div></div>
-      <div class="ore-card"><div class="ore-num">5.085</div><div class="ore-lbl">H/Uomo 2004</div></div>
-      <div class="ore-card"><div class="ore-num">4.211</div><div class="ore-lbl">H/Uomo 2009</div></div>
-    </div>
-  </div>
-</section>
-
 <!-- GALLERIA -->
 <section id="galleria">
   <div class="container">
     <div class="section-tag">📸 Immagini</div>
     <h2 class="section-h2">Galleria <span>fotografica</span></h2>
     <p class="section-lead">Dalla fondazione del 2001 ai giorni nostri: esercitazioni, interventi d'emergenza e la quotidianità dei volontari.</p>
-    <div class="gall-grid">
-      <div class="gall-item gall-i1"><div class="gall-label">📸 Foto principale</div></div>
-      <div class="gall-item gall-i2"><div class="gall-label">Alluvione</div></div>
-      <div class="gall-item gall-i3"><div class="gall-label">Esercitazione</div></div>
-      <div class="gall-item gall-i4"><div class="gall-label">Abruzzo 2009</div></div>
-      <div class="gall-item gall-i5"><div class="gall-label">Campo base</div></div>
-      <div class="gall-item gall-i6"><div class="gall-label">25° Anniversario</div></div>
-    </div>
-    <div class="gall-note">
-      <span style="font-size:1.5rem">📂</span>
-      <p>Le foto degli interventi e del <strong>25° anniversario</strong> si trovano sul Drive condiviso. Per aggiungere immagini alla galleria pubblica accedi all'<strong>Area Riservata</strong>.</p>
+    <div class="gallery-grid">
+      <div class="gallery-slot slot-large"><span>📷</span><p>FOTO-1</p></div>
+      <div class="gallery-slot"><span>📷</span><p>FOTO-2</p></div>
+      <div class="gallery-slot"><span>📷</span><p>FOTO-3</p></div>
+      <div class="gallery-slot"><span>📷</span><p>FOTO-4</p></div>
+      <div class="gallery-slot"><span>📷</span><p>FOTO-5</p></div>
+      <div class="gallery-slot"><span>📷</span><p>FOTO-6</p></div>
+      <div class="gallery-slot"><span>📷</span><p>FOTO-7</p></div>
+      <div class="gallery-slot"><span>📷</span><p>FOTO-8</p></div>
     </div>
   </div>
 </section>
@@ -765,18 +699,14 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
         <p class="section-lead">Siamo sempre alla ricerca di nuovi volontari con voglia di mettersi in gioco. Scrivi a <strong>@pcanacasale</strong> sui social!</p>
         <div class="req-item">
           <div class="req-num-circle">1</div>
-          <div class="req-body"><h4>Idoneità fisica</h4><p>Buona salute e idoneità all'attività di protezione civile secondo la normativa vigente.</p></div>
-        </div>
-        <div class="req-item">
-          <div class="req-num-circle">2</div>
           <div class="req-body"><h4>Età</h4><p>Tra i 18 e gli 80 anni. Accogliamo volontari di tutte le generazioni!</p></div>
         </div>
         <div class="req-item">
-          <div class="req-num-circle">3</div>
+          <div class="req-num-circle">2</div>
           <div class="req-body"><h4>Disponibilità</h4><p>Essere disponibili anche per emergenze fuori dalla propria regione di residenza.</p></div>
         </div>
         <div class="req-item">
-          <div class="req-num-circle">4</div>
+          <div class="req-num-circle">3</div>
           <div class="req-body"><h4>Iscrizione ANA</h4><p>Essere soci o aggregati della Sezione ANA di Casale, o presentare domanda insieme all'adesione.</p></div>
         </div>
       </div>
