@@ -613,6 +613,173 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
 @media (min-width:769px) {
   .hamburger { display:none; }
 }
+
+/* ── CELEBRAZIONI ── */
+#celebrazioni {
+  background: linear-gradient(160deg, #0d2137 0%, #1a3a5c 50%, #2d6a4f 100%);
+  padding: 5rem 0 4rem;
+  position: relative;
+  overflow: hidden;
+}
+#celebrazioni::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+.celeb-inner { position: relative; z-index: 1; }
+
+.celeb-tag {
+  display: inline-block;
+  background: rgba(245,197,24,0.2);
+  color: var(--giallo);
+  font-size: 0.72rem; font-weight: 900;
+  letter-spacing: 2px; text-transform: uppercase;
+  padding: 0.4rem 1rem; border-radius: 20px;
+  margin-bottom: 1rem;
+  border: 1px solid rgba(245,197,24,0.3);
+}
+.celeb-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: white;
+  line-height: 1.2;
+  margin-bottom: 0.6rem;
+}
+.celeb-title em { font-style: normal; color: var(--giallo); }
+.celeb-sub {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.65);
+  margin-bottom: 2.5rem;
+}
+
+/* Video */
+.celeb-video-wrap {
+  max-width: 700px;
+  margin: 0 auto 3rem;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+  border: 2px solid rgba(255,255,255,0.1);
+}
+.celeb-video-wrap video {
+  width: 100%; display: block;
+}
+
+/* Giorni */
+.celeb-days {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+  margin-bottom: 2rem;
+}
+.day-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 1.8rem 1.5rem;
+  backdrop-filter: blur(4px);
+}
+.day-label {
+  font-size: 0.65rem; font-weight: 900;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--giallo);
+  margin-bottom: 0.4rem;
+}
+.day-date {
+  font-size: 1.6rem; font-weight: 900;
+  color: white;
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+.day-program { list-style: none; }
+.day-program li {
+  display: flex;
+  gap: 0.7rem;
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.8);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  line-height: 1.4;
+}
+.day-program li:last-child { border-bottom: none; }
+.day-program .ora {
+  font-weight: 800;
+  color: var(--giallo);
+  flex-shrink: 0;
+  min-width: 42px;
+}
+
+/* CTA */
+.celeb-cta {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.btn-ics {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--giallo);
+  color: var(--blu);
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.82rem; font-weight: 900;
+  padding: 0.75rem 1.6rem;
+  border-radius: 50px;
+  border: none; cursor: pointer;
+  text-decoration: none;
+  transition: transform 0.15s, box-shadow 0.15s;
+  box-shadow: 0 4px 20px rgba(245,197,24,0.35);
+}
+.btn-ics:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(245,197,24,0.45); }
+
+/* Luogo */
+.celeb-place {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 1rem;
+}
+.celeb-place strong { color: white; }
+
+/* Testo evento */
+.celeb-desc {
+  max-width: 620px;
+  margin: 0 auto 2.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.7);
+  line-height: 1.8;
+}
+
+/* Vi aspettiamo */
+.celeb-footer {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+.celeb-footer p {
+  font-family: 'Lora', serif;
+  font-style: italic;
+  font-size: 1.4rem;
+  color: white;
+  margin-bottom: 0.4rem;
+}
+.celeb-footer span {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@media (max-width: 600px) {
+  .celeb-days { grid-template-columns: 1fr; }
+  .celeb-video-wrap { border-radius: 14px; }
+}
 </style>
 </head>
 <body>
@@ -630,7 +797,7 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
     <span></span><span></span><span></span>
   </button>
   <ul class="nav-links" id="navLinks">
-    <li><a href="#chi-siamo">Chi Siamo</a></li>
+    <li><a href="#celebrazioni">Celebrazioni</a></li><li><a href="#chi-siamo">Chi Siamo</a></li>
     <li><a href="#rollup">Le nostre storie</a></li>
     <li><a href="#galleria">Galleria</a></li>
     <li><a href="#aderire">Aderire</a></li>
@@ -653,6 +820,67 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
     <div class="hero-logo-wrap">
       <img src="images/logo-25anni.png?v=2" alt="Logo 25 Anni PC ANA Casale" class="hero-logo25">
     </div>
+  </div>
+</section>
+
+
+<!-- CELEBRAZIONI -->
+<section id="celebrazioni">
+  <div class="container celeb-inner">
+
+    <div class="celeb-video-wrap">
+      <video autoplay muted loop playsinline>
+        <source src="images/video-25anni.mp4" type="video/mp4">
+      </video>
+    </div>
+
+        <div style="text-align:center;margin-bottom:2.5rem">
+      <h2 class="celeb-title">Festeggia con noi<br><em>25 anni di Protezione Civile</em></h2>
+    </div>
+
+<div class="celeb-place">
+      <a href="https://maps.google.com/?q=Piazza+Libertà,+Mirabello+Monferrato+AL" target="_blank" style="display:flex;align-items:center;gap:0.5rem;color:inherit;text-decoration:none;opacity:0.85;transition:opacity 0.2s" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.85"><span>📍</span><span><strong>Piazza Libertà, Mirabello Monferrato (AL)</strong> — Campo Soccorritori <span style="font-size:0.72rem;margin-left:4px">↗</span></span></a>
+    </div>
+
+    <div class="celeb-days">
+      <div class="day-card">
+        <div class="day-label">Sabato</div>
+        <div class="day-date">6 Giugno<br>2026</div>
+        <ul class="day-program">
+          <li><span class="ora">09:30</span><span>Alzabandiera con le Autorità</span></li>
+          <li><span class="ora">09:45</span><span>Allestimento Campo Soccorritori</span></li>
+          <li><span class="ora">14:30</span><span>Apertura Campo Soccorritori al pubblico</span></li>
+          <li><span class="ora">14:30</span><span>Visite al campo e attività per ragazzi</span></li>
+          <li><span class="ora">18:30</span><span>Ammainabandiera</span></li>
+        </ul>
+      </div>
+      <div class="day-card">
+        <div class="day-label">Domenica</div>
+        <div class="day-date">7 Giugno<br>2026</div>
+        <ul class="day-program">
+          <li><span class="ora">09:00</span><span>Alzabandiera con le Autorità</span></li>
+          <li><span class="ora">09:00</span><span>Apertura Campo e visite al pubblico</span></li>
+          <li><span class="ora">10:00</span><span>Allocuzioni per il 25° Anniversario</span></li>
+          <li><span class="ora">11:00</span><span>Santa Messa</span></li>
+          <li><span class="ora">12:30</span><span>Pranzo ufficiale presso Sede Gruppo Mirabello <small style="display:block;font-size:0.7rem;color:rgba(255,255,255,0.45);margin-top:1px">Prenotazione obbligatoria</small></span></li>
+          <li><span class="ora">17:30</span><span>Ammainabandiera e chiusura celebrazioni</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="celeb-desc">
+      Un'esercitazione sezionale con allestimento del Campo Soccorritori aperto alla visita del pubblico.
+      Attività per grandi e piccini, dimostrazioni operative, e due giorni di festa per celebrare
+      25 anni di volontariato al servizio della comunità del Monferrato e non solo.
+    </p>
+
+    <div class="celeb-footer">
+      <p>"Vi aspettiamo a Mirabello!"</p>
+      <div style="margin-top:1.2rem">
+        <a class="btn-ics" onclick="scaricaCalendario()">📅 Aggiungi al calendario</a>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -871,53 +1099,64 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
     <p class="section-lead">Seguici sui social o vieni a trovarci in sede!</p>
     <div class="cont-grid">
       <div class="cont-card">
-        <div class="cont-icon">📍</div>
+        <div class="cont-icon"><img src="images/logo-sezione.png" alt="Logo Sezione ANA" style="height:48px;width:auto;object-fit:contain" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><span style="display:none;font-size:2rem">🏔️</span></div>
         <h4>Sede Sezionale</h4>
-        <p>Via T. De Cristoforis, 16<br>15033 Casale Monferrato (AL)</p>
+        <p>Via T. De Cristoforis, 16<br>15033 Casale Monferrato (AL)<br><a href="https://www.anacasale.it" target="_blank" style="color:var(--verde);font-weight:700">www.anacasale.it</a></p>
       </div>
       <div class="cont-card">
-        <div class="cont-icon">🌐</div>
-        <h4>Sito Web</h4>
-        <p><a href="https://www.anacasale.it" target="_blank">www.anacasale.it</a><br><a href="https://www.ana.it" target="_blank">www.ana.it</a></p>
+        <div class="cont-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><path fill="#1877F2" d="M24 12.073C24 5.405 18.627 0 12 0S0 5.405 0 12.073C0 18.1 4.388 23.094 10.125 24v-8.437H7.078v-3.49h3.047V9.41c0-3.025 1.792-4.697 4.533-4.697 1.312 0 2.686.235 2.686.235v2.97h-1.513c-1.491 0-1.956.93-1.956 1.886v2.269h3.328l-.532 3.49h-2.796V24C19.612 23.094 24 18.1 24 12.073z"/></svg></div>
+        <h4>Facebook</h4>
+        <p><a href="https://www.facebook.com/PROTEZIONE-CIVILE-ANA-SEZIONE-CASALE-MONFERRATO-225013567553654/?fref=ts" target="_blank" style="color:var(--verde);font-weight:700">Protezione Civile ANA<br>Casale Monferrato</a></p>
       </div>
       <div class="cont-card">
-        <div class="cont-icon">📱</div>
-        <h4>Social</h4>
-        <p>Facebook & Instagram<br><strong style="color:var(--verde)">@pcanacasale</strong></p>
+        <div class="cont-icon"><svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24"><defs><radialGradient id="ig" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#fdf497"/><stop offset="5%" stop-color="#fdf497"/><stop offset="45%" stop-color="#fd5949"/><stop offset="60%" stop-color="#d6249f"/><stop offset="90%" stop-color="#285AEB"/></radialGradient></defs><path fill="url(#ig)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></div>
+        <h4>Instagram</h4>
+        <p><a href="https://www.instagram.com/pcanacasale/" target="_blank" style="color:var(--verde);font-weight:700">@pcanacasale</a></p>
       </div>
-    </div>
-    <div class="social-row">
-      <a href="https://www.anacasale.it" target="_blank" class="social-btn">🌐 anacasale.it</a>
-      <a href="https://www.ana.it/protezione-civile/" target="_blank" class="social-btn">🏔️ PC ANA Nazionale</a>
-      <a href="#" class="social-btn">📘 Facebook @pcanacasale</a>
-      <a href="#" class="social-btn">📸 Instagram @pcanacasale</a>
     </div>
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer>
-  <div class="f-logo">🏔️ PC ANA · Casale Monferrato</div>
-  <p class="f-giallo">25 anni al servizio della comunità · 2001–2026</p>
-  <div class="f-links">
-    <a href="#chi-siamo">Chi Siamo</a>
-    <a href="#rollup">Le nostre storie</a>
-    <a href="#attivita">Attività</a>
-    <a href="#galleria">Galleria</a>
-    <a href="#aderire">Aderire</a>
-    <a href="#contatti">Contatti</a>
-    <a href="area-riservata.html">Area Riservata</a>
-    <a href="https://www.anacasale.it" target="_blank">anacasale.it</a>
-  </div>
-  <p class="f-info">Unità di Protezione Civile · Sezione ANA di Casale Monferrato<br>
-  Via T. De Cristoforis, 16 · 15033 Casale Monferrato (AL) · C.F. 82008550061<br>
-  Associazione Nazionale Alpini · 1° Raggruppamento (Piemonte, Liguria, Valle d'Aosta)</p>
+<footer style="background:var(--blu);color:rgba(255,255,255,0.7);text-align:center;padding:1.8rem 1rem;font-size:0.78rem;line-height:1.9">
+  <p style="font-weight:700;color:white">Unità di Protezione Civile — Sezione ANA di Casale Monferrato</p>
+  <p>Via T. De Cristoforis, 16 — 15033 Casale Monferrato (AL) — C.F. 82008550061</p>
+  <p style="margin-top:0.5rem;font-size:0.7rem;color:rgba(255,255,255,0.4)">Created by Riccardo Costa</p>
 </footer>
 
 <!-- MODAL -->
 
 
 <script>
+
+function scaricaCalendario() {
+  const ics = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//PC ANA Casale//25 Anniversario//IT',
+    'BEGIN:VEVENT',
+    'DTSTART:20260606T080000Z',
+    'DTEND:20260606T200000Z',
+    'SUMMARY:25° Anniversario PC ANA Casale – Giorno 1',
+    'DESCRIPTION:Esercitazione Sezionale con Campo Soccorritori aperto al pubblico. Piazza Libertà\, Mirabello (AL)',
+    'LOCATION:Piazza Libertà\, Mirabello (AL)',
+    'END:VEVENT',
+    'BEGIN:VEVENT',
+    'DTSTART:20260607T070000Z',
+    'DTEND:20260607T160000Z',
+    'SUMMARY:25° Anniversario PC ANA Casale – Giorno 2',
+    'DESCRIPTION:Allocuzioni\, Santa Messa e pranzo ufficiale. Piazza Libertà\, Mirabello (AL)',
+    'LOCATION:Piazza Libertà\, Mirabello (AL)',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+  const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = '25anni-pcana-casale.ics';
+  a.click(); URL.revokeObjectURL(url);
+}
+
 function toggleMenu() {
   document.getElementById('navLinks').classList.toggle('open');
   document.getElementById('hamburger').classList.toggle('open');
