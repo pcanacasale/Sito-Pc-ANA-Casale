@@ -620,7 +620,7 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
 <!-- NAVBAR -->
 <nav>
   <a href="#hero" class="nav-logo">
-    <img src="images/logo-ana.gif" alt="Logo PC ANA Casale" class="nav-gif">
+    <img src="images/logo-ana.gif?v=2" alt="Logo PC ANA Casale" class="nav-gif">
     <div class="nav-logo-text">
       <div class="t1">PC ANA Casale Monferrato</div>
       <div class="t2">25 Anni Insieme</div>
@@ -651,7 +651,7 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
       <div class="hero-motto-plain">Il nostro fronte è la Solidarietà</div>
     </div>
     <div class="hero-logo-wrap">
-      <img src="images/logo-25anni.png" alt="Logo 25 Anni PC ANA Casale" class="hero-logo25">
+      <img src="images/logo-25anni.png?v=2" alt="Logo 25 Anni PC ANA Casale" class="hero-logo25">
     </div>
   </div>
 </section>
@@ -724,8 +724,8 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
           <h3>Un gruppo di persone ordinarie,<br>capaci di cose straordinarie</h3>
         </div>
         <div class="story-photos">
-          <div class="photo-wrap" style="background-image:url('images/foto-A1.jpg')"></div>
-          <div class="photo-wrap" style="background-image:url('images/foto-A2.jpg')"></div>
+          <div class="photo-wrap" style="background-image:url('images/foto-A1.jpg?v=2')"></div>
+          <div class="photo-wrap" style="background-image:url('images/foto-A2.jpg?v=2')"></div>
         </div>
         <div class="story-body">
           <p>Dal 2001, anno di fondazione dell'Unità di PC della Sezione di Casale, i volontari sono di supporto alla popolazione in caso di emergenza pubblica.</p>
@@ -740,8 +740,8 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
           <h3>Ciao, lo sai cos'è la<br>Protezione Civile ANA?</h3>
         </div>
         <div class="story-photos">
-          <div class="photo-wrap" style="background-image:url('images/foto-B1.jpg')"></div>
-          <div class="photo-wrap" style="background-image:url('images/foto-B2.jpg')"></div>
+          <div class="photo-wrap" style="background-image:url('images/foto-B1.jpg?v=2')"></div>
+          <div class="photo-wrap" style="background-image:url('images/foto-B2.jpg?v=2')"></div>
         </div>
         <div class="story-body">
           <p>La Protezione Civile dell'ANA nasce in pratica all'inizio degli anni '80. Dal 2001, i volontari della Sezione di Casale sono al fianco della popolazione nelle emergenze.</p>
@@ -756,8 +756,8 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
           <h3>Pandemia di COVID-19:<br>un'emergenza fuori dal comune</h3>
         </div>
         <div class="story-photos">
-          <div class="photo-wrap" style="background-image:url('images/foto-C1.jpg')"></div>
-          <div class="photo-wrap" style="background-image:url('images/foto-C2.jpg')"></div>
+          <div class="photo-wrap" style="background-image:url('images/foto-C1.jpg?v=2')"></div>
+          <div class="photo-wrap" style="background-image:url('images/foto-C2.jpg?v=2')"></div>
         </div>
         <div class="story-body">
           <p>Il 2020 ci ha aperto gli occhi su un tipo di emergenza a noi sconosciuto. I volontari hanno dato supporto alle Amministrazioni Locali e alla cittadinanza, gestendo la consegna dei DPI presso le RSA del territorio.</p>
@@ -809,6 +809,10 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
         <img src="images/galleria-8.jpg" alt="Foto 8" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <div class="slot-empty"><span>📷</span><p>FOTO-8</p></div>
       </div>
+      <div class="gallery-slot">
+        <img src="images/galleria-9.jpg" alt="Foto 9" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="slot-empty"><span>📷</span><p>FOTO-9</p></div>
+      </div>
     </div>
   </div>
 </section>
@@ -841,26 +845,19 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
         <div class="fi"><input type="email" placeholder="Email *"></div>
         <div class="fi"><input type="tel" placeholder="Telefono"></div>
         <div class="fi">
-          <select>
+          <select id="socioAna" onchange="toggleGruppo()">
             <option value="">Sei già socio ANA?</option>
-            <option>Sì, sono socio alpino</option>
-            <option>Sì, sono aggregato</option>
-            <option>No, voglio iscrivermi</option>
+            <option value="si">Sì</option>
+            <option value="no">No</option>
           </select>
         </div>
-        <div class="fi">
-          <select>
-            <option value="">Competenze specifiche (opzionale)</option>
-            <option>Operatore radio</option>
-            <option>Motoseghista</option>
-            <option>Sanitario / infermiere</option>
-            <option>Cucina da campo</option>
-            <option>Autista mezzi pesanti</option>
-            <option>Altro</option>
-          </select>
+        <div class="fi" id="gruppoField" style="display:none">
+          <input type="text" id="gruppoAna" placeholder="In che gruppo alpini sei iscritto?">
         </div>
         <div class="fi"><textarea placeholder="Presentati liberamente..."></textarea></div>
-        <button class="btn-submit">Invia richiesta 🏔️</button>
+        <button class="btn-submit" id="btnInvia" onclick="inviaRichiesta()">Invia richiesta</button>
+        <div id="formSuccess" style="display:none;margin-top:1rem;background:#d1fae5;border-radius:12px;padding:0.8rem 1rem;font-size:0.85rem;font-weight:700;color:#065f46">✅ Richiesta inviata! Ti contatteremo presto.</div>
+        <div id="formError" style="display:none;margin-top:1rem;background:#fee2e2;border-radius:12px;padding:0.8rem 1rem;font-size:0.85rem;font-weight:700;color:#991b1b">⚠️ Errore nell'invio. Riprova.</div>
       </div>
     </div>
   </div>
@@ -941,6 +938,10 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
         <div class="area-card" onclick="openGestioneUtenti()">
           <h4>👥 Gestione utenti</h4>
           <p>Aggiungi, modifica o rimuovi volontari dall'Unità</p>
+        </div>
+        <div class="area-card" onclick="openRichieste()">
+          <h4>📬 Richieste di adesione <span id="badgeRichieste" style="display:none;background:#e11d48;color:white;border-radius:20px;padding:1px 8px;font-size:0.7rem;margin-left:6px"></span></h4>
+          <p>Visualizza le richieste ricevute dal modulo di contatto</p>
         </div>
       </div>
 
@@ -1029,6 +1030,7 @@ async function doLogin(){
       document.getElementById('areaInterna').classList.add('active');
       document.getElementById('welcomeMsg').innerHTML = `Ciao <strong>${currentUser.nome}</strong> — ${currentUser.ruolo}`;
       document.getElementById('masterMenu').style.display = currentUser.tipo_accesso === 'master' ? 'block' : 'none';
+    if(currentUser.tipo_accesso === 'master') caricaBadgeRichieste();
 
     } else {
       errorEl.style.display='block';
@@ -1056,6 +1058,17 @@ function openGestioneUtenti(){
   alert('In costruzione: Gestione Utenti');
 }
 
+async function caricaBadgeRichieste(){
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/richieste_adesione?letta=eq.false&select=id`, {
+      headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`}
+    });
+    const data = await res.json();
+    const badge = document.getElementById('badgeRichieste');
+    if(data.length > 0){ badge.textContent=data.length; badge.style.display='inline'; }
+  } catch(e){}
+}
+
 function logout(){
   currentUser = null;
   document.getElementById('areaInterna').classList.remove('active');
@@ -1063,6 +1076,117 @@ function logout(){
   document.getElementById('loginUser').value='';
   document.getElementById('loginPass').value='';
   closeModal();
+}
+
+async function inviaRichiesta(){
+  const nome = document.getElementById('formNome')?.value.trim() || document.querySelector('#aderire input[placeholder="Nome e Cognome *"]').value.trim();
+  const email = document.querySelector('#aderire input[type="email"]').value.trim();
+  const telefono = document.querySelector('#aderire input[type="tel"]').value.trim();
+  const socio = document.getElementById('socioAna').value;
+  const gruppo = document.getElementById('gruppoAna')?.value.trim() || '';
+  const messaggio = document.querySelector('#aderire textarea').value.trim();
+  const btnEl = document.getElementById('btnInvia');
+  const successEl = document.getElementById('formSuccess');
+  const errorEl = document.getElementById('formError');
+
+  if(!nome || !email){ errorEl.textContent='⚠️ Inserisci almeno nome e email.'; errorEl.style.display='block'; return; }
+  
+  successEl.style.display='none';
+  errorEl.style.display='none';
+  btnEl.disabled=true; btnEl.textContent='Invio in corso...';
+
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/richieste_adesione`, {
+      method: 'POST',
+      headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
+      body: JSON.stringify({ nome, email, telefono, socio_ana: socio, gruppo_ana: gruppo, messaggio })
+    });
+    if(res.ok){
+      successEl.style.display='block';
+      // Reset form
+      document.querySelector('#aderire input[placeholder="Nome e Cognome *"]').value='';
+      document.querySelector('#aderire input[type="email"]').value='';
+      document.querySelector('#aderire input[type="tel"]').value='';
+      document.getElementById('socioAna').value='';
+      document.getElementById('gruppoField').style.display='none';
+      document.querySelector('#aderire textarea').value='';
+    } else { errorEl.style.display='block'; }
+  } catch(e){ errorEl.style.display='block'; }
+  
+  btnEl.disabled=false; btnEl.textContent='Invia richiesta';
+}
+
+async function openRichieste(){
+  document.getElementById('areaInterna').classList.remove('active');
+  document.getElementById('richiestePanel').classList.add('active');
+  await caricaRichieste();
+}
+
+async function caricaRichieste(){
+  const list = document.getElementById('richiesteList');
+  list.innerHTML = '<p style="color:var(--testo-ch);font-size:0.85rem">⏳ Caricamento...</p>';
+  try {
+    const res = await fetch(`${SUPA_URL}/rest/v1/richieste_adesione?select=*&order=created_at.desc`, {
+      headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` }
+    });
+    const richieste = await res.json();
+    
+    // Update badge
+    const nonLette = richieste.filter(r => !r.letta).length;
+    const badge = document.getElementById('badgeRichieste');
+    if(nonLette > 0){ badge.textContent = nonLette; badge.style.display='inline'; }
+    else { badge.style.display='none'; }
+
+    if(!richieste.length){ list.innerHTML='<p style="color:var(--testo-ch);font-size:0.85rem">Nessuna richiesta ricevuta.</p>'; return; }
+    
+    list.innerHTML='';
+    richieste.forEach(r => {
+      const data = new Date(r.created_at).toLocaleDateString('it-IT', {day:'2-digit',month:'2-digit',year:'numeric'});
+      const div = document.createElement('div');
+      div.style.cssText = `background:${r.letta ? 'var(--crema)' : 'var(--blu-pale)'}; border-radius:14px; padding:1rem 1.2rem; margin-bottom:0.8rem; border-left:3px solid ${r.letta ? 'var(--verde-pale)' : 'var(--blu)'}`;
+      div.innerHTML = `
+        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem">
+          <div>
+            <strong style="font-size:0.95rem;color:var(--blu)">${r.nome}</strong>
+            ${!r.letta ? '<span style="font-size:0.65rem;font-weight:800;background:var(--blu);color:white;border-radius:10px;padding:1px 7px;margin-left:6px">NUOVA</span>' : ''}
+          </div>
+          <span style="font-size:0.72rem;color:var(--testo-ch)">${data}</span>
+        </div>
+        <div style="font-size:0.82rem;color:var(--testo-ch);line-height:1.6">
+          <div>📧 ${r.email}${r.telefono ? ' · 📞 '+r.telefono : ''}</div>
+          ${r.socio_ana ? '<div>👤 Socio ANA: '+r.socio_ana+(r.gruppo_ana ? ' — '+r.gruppo_ana : '')+'</div>' : ''}
+          ${r.messaggio ? '<div style="margin-top:0.4rem;font-style:italic">"'+r.messaggio+'"</div>' : ''}
+        </div>
+        <div style="margin-top:0.7rem;display:flex;gap:0.5rem">
+          ${!r.letta ? '<button class="btn-sm btn-ok" onclick="segnaLetta(''+r.id+'')">Segna come letta</button>' : '<span style="font-size:0.72rem;color:var(--testo-ch)">✓ Letta</span>'}
+          <button class="btn-sm btn-danger" onclick="eliminaRichiesta(''+r.id+'')">Elimina</button>
+        </div>`;
+      list.appendChild(div);
+    });
+  } catch(e){ list.innerHTML='<p style="color:red;font-size:0.85rem">⚠️ Errore nel caricamento.</p>'; }
+}
+
+async function segnaLetta(id){
+  await fetch(`${SUPA_URL}/rest/v1/richieste_adesione?id=eq.${id}`, {
+    method:'PATCH',
+    headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,'Content-Type':'application/json'},
+    body: JSON.stringify({letta:true})
+  });
+  await caricaRichieste();
+}
+
+async function eliminaRichiesta(id){
+  if(!confirm('Eliminare questa richiesta?')) return;
+  await fetch(`${SUPA_URL}/rest/v1/richieste_adesione?id=eq.${id}`, {
+    method:'DELETE',
+    headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`}
+  });
+  await caricaRichieste();
+}
+
+function toggleGruppo(){
+  const val = document.getElementById('socioAna').value;
+  document.getElementById('gruppoField').style.display = val === 'si' ? 'block' : 'none';
 }
 
 function toggleMenu(){
