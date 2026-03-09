@@ -635,7 +635,7 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
     <li><a href="#galleria">Galleria</a></li>
     <li><a href="#aderire">Aderire</a></li>
     <li><a href="#contatti">Contatti</a></li>
-    <li><a href="#" class="btn-login" onclick="openModal();return false;">🔒 Area Riservata</a></li>
+    <li><a href="area-riservata.html" class="btn-login">🔒 Area Riservata</a></li>
   </ul>
 </nav>
 
@@ -906,7 +906,7 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
     <a href="#galleria">Galleria</a>
     <a href="#aderire">Aderire</a>
     <a href="#contatti">Contatti</a>
-    <a href="#" onclick="openModal();return false;">Area Riservata</a>
+    <a href="area-riservata.html">Area Riservata</a>
     <a href="https://www.anacasale.it" target="_blank">anacasale.it</a>
   </div>
   <p class="f-info">Unità di Protezione Civile · Sezione ANA di Casale Monferrato<br>
@@ -915,301 +915,63 @@ footer p.f-info { font-size:0.75rem; color:rgba(255,255,255,0.45); line-height:1
 </footer>
 
 <!-- MODAL -->
-<div class="modal-overlay" id="loginModal" onclick="if(event.target===this)closeModal()">
-  <div class="modal">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="loginForm" class="modal-area active">
-      <div class="modal-badge">🔒 Accesso riservato</div>
-      <h2>Area Riservata</h2>
-      <p class="sub">Per i volontari dell'Unità di Protezione Civile</p>
-      <div class="login-error" id="loginError">⚠️ Credenziali non corrette. Riprova.</div>
-      <div class="fi"><input type="text" id="loginUser" placeholder="Utente"></div>
-      <div class="fi"><input type="password" id="loginPass" placeholder="Password"></div>
-      <button class="btn-submit" onclick="doLogin()">Accedi</button>
-      <div id="loginSpinner" style="display:none;text-align:center;margin-top:1rem;color:var(--testo-ch);font-size:0.85rem;">⏳ Accesso in corso...</div>
-    </div>
-    <div id="areaInterna" class="modal-area">
-      <div class="modal-badge" style="background:var(--verde-pale);color:var(--verde)">✅ Benvenuto/a!</div>
-      <h2 style="margin-bottom:0.3rem">Area Volontari</h2>
-      <p style="font-size:0.8rem;color:var(--testo-ch);margin-bottom:1.2rem" id="welcomeMsg"></p>
 
-      <!-- MASTER ONLY -->
-      <div id="masterMenu" style="display:none">
-        <div class="area-card" onclick="openGestioneUtenti()">
-          <h4>👥 Gestione utenti</h4>
-          <p>Aggiungi, modifica o rimuovi volontari dall'Unità</p>
-        </div>
-        <div class="area-card" onclick="openRichieste()">
-          <h4>📬 Richieste di adesione <span id="badgeRichieste" style="display:none;background:#e11d48;color:white;border-radius:20px;padding:1px 8px;font-size:0.7rem;margin-left:6px"></span></h4>
-          <p>Visualizza le richieste ricevute dal modulo di contatto</p>
-        </div>
-      </div>
-
-      <!-- TUTTI -->
-
-      <div class="area-card" onclick="openTeable('interventi')">
-        <h4>📋 Inserimento interventi</h4>
-        <p>Registra un nuovo intervento o esercitazione</p>
-      </div>
-      <div class="area-card" id="cardVolontari" onclick="openTeable('volontari')">
-        <h4>👤 Elenco volontari</h4>
-        <p id="volontariDesc">Visualizza la lista dei volontari (sola lettura)</p>
-      </div>
-
-      <button class="btn-logout" onclick="logout()">Esci dall'area riservata</button>
-    </div>
-  </div>
-
-  <!-- GESTIONE UTENTI PANEL -->
-  <div id="gestioneUtenti" class="modal-area" style="max-height:70vh;overflow-y:auto">
-    <button onclick="backToArea()" style="background:none;border:none;cursor:pointer;font-size:0.8rem;font-weight:700;color:var(--testo-ch);margin-bottom:1rem;padding:0">← Torna al menu</button>
-    <div class="modal-badge">👥 Gestione utenti</div>
-    <h2 style="margin-bottom:1.2rem">Utenti registrati</h2>
-    <div id="utentiList"></div>
-    <hr style="margin:1.5rem 0;border:none;border-top:2px solid var(--verde-pale)">
-    <h3 style="font-size:1rem;font-weight:800;color:var(--blu);margin-bottom:1rem">➕ Nuovo utente</h3>
-    <div class="login-error" id="nuovoUtenteErr" style="display:none"></div>
-    <div class="fi"><input type="text" id="nuovoNome" placeholder="Nome e Cognome *"></div>
-    <div class="fi"><input type="text" id="nuovoUsername" placeholder="Username *"></div>
-    <div class="fi"><input type="password" id="nuovaPassword" placeholder="Password *"></div>
-    <div class="fi"><input type="text" id="nuovoRuolo" placeholder="Ruolo (es. Volontario, Sanitario...) *"></div>
-    <div class="fi">
-      <select id="nuovoTipo">
-        <option value="standard">👤 Standard</option>
-        <option value="master">⭐ Master</option>
-      </select>
-    </div>
-    <button class="btn-submit" onclick="salvaUtente()">Salva utente</button>
-  </div>
-
-</div>
 
 <script>
-const SUPA_URL = 'https://pggtmyarpuztfewqgwyc.supabase.co';
-const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnZ3RteWFycHV6dGZld3Fnd3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwNDk4MjksImV4cCI6MjA4ODYyNTgyOX0.NqhNcmN-tqv5XWyeokSkjvOM6PxnmlDtZNcADeHRp9c';
-
-let currentUser = null;
-
-function openModal(){
-  document.getElementById('loginModal').classList.add('active');
-  document.body.style.overflow='hidden';
-}
-function closeModal(){
-  document.getElementById('loginModal').classList.remove('active');
-  document.body.style.overflow='';
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+  document.getElementById('hamburger').classList.toggle('open');
 }
 
-async function doLogin(){
-  const username = document.getElementById('loginUser').value.trim();
-  const password = document.getElementById('loginPass').value.trim();
-  const errorEl = document.getElementById('loginError');
-  const spinner = document.getElementById('loginSpinner');
-
-  if(!username || !password){
-    errorEl.style.display='block';
-    errorEl.textContent='⚠️ Inserisci utente e password.';
-    return;
-  }
-
-  errorEl.style.display='none';
-  spinner.style.display='block';
-  document.querySelector('#loginForm .btn-submit').disabled = true;
-
-  try {
-    const res = await fetch(`${SUPA_URL}/rest/v1/utenti?username=eq.${encodeURIComponent(username)}&password=eq.${encodeURIComponent(password)}&attivo=eq.true&select=id,nome,ruolo,tipo_accesso`, {
-      headers: {
-        'apikey': SUPA_KEY,
-        'Authorization': `Bearer ${SUPA_KEY}`
-      }
-    });
-    const data = await res.json();
-
-    if(data && data.length > 0){
-      currentUser = data[0];
-      document.getElementById('loginForm').classList.remove('active');
-      document.getElementById('areaInterna').classList.add('active');
-      document.getElementById('welcomeMsg').innerHTML = `Ciao <strong>${currentUser.nome}</strong> — ${currentUser.ruolo}`;
-      document.getElementById('masterMenu').style.display = currentUser.tipo_accesso === 'master' ? 'block' : 'none';
-    if(currentUser.tipo_accesso === 'master') caricaBadgeRichieste();
-
-    } else {
-      errorEl.style.display='block';
-      errorEl.textContent='⚠️ Credenziali non corrette. Riprova.';
-    }
-  } catch(e) {
-    errorEl.style.display='block';
-    errorEl.textContent='⚠️ Errore di connessione. Riprova.';
-  }
-
-  spinner.style.display='none';
-  document.querySelector('#loginForm .btn-submit').disabled = false;
-}
-
-function openTeable(sezione){
-  // Sostituire con l'URL reale di Teable.io
-  const urls = {
-    interventi: 'https://app.teable.ai/share/shrm9NARRyXGOaT1L6c/view',
-    volontari: 'https://app.teable.ai/share/shre0oZ3AUhA6RnhPVi/view',
-  };
-  window.open(urls[sezione], '_blank');
-}
-
-function openGestioneUtenti(){
-  alert('In costruzione: Gestione Utenti');
-}
-
-async function caricaBadgeRichieste(){
-  try {
-    const res = await fetch(`${SUPA_URL}/rest/v1/richieste_adesione?letta=eq.false&select=id`, {
-      headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`}
-    });
-    const data = await res.json();
-    const badge = document.getElementById('badgeRichieste');
-    if(data.length > 0){ badge.textContent=data.length; badge.style.display='inline'; }
-  } catch(e){}
-}
-
-function logout(){
-  currentUser = null;
-  document.getElementById('areaInterna').classList.remove('active');
-  document.getElementById('loginForm').classList.add('active');
-  document.getElementById('loginUser').value='';
-  document.getElementById('loginPass').value='';
-  closeModal();
-}
-
-async function inviaRichiesta(){
-  const nome = document.getElementById('formNome')?.value.trim() || document.querySelector('#aderire input[placeholder="Nome e Cognome *"]').value.trim();
-  const email = document.querySelector('#aderire input[type="email"]').value.trim();
-  const telefono = document.querySelector('#aderire input[type="tel"]').value.trim();
-  const socio = document.getElementById('socioAna').value;
-  const gruppo = document.getElementById('gruppoAna')?.value.trim() || '';
-  const messaggio = document.querySelector('#aderire textarea').value.trim();
-  const btnEl = document.getElementById('btnInvia');
-  const successEl = document.getElementById('formSuccess');
-  const errorEl = document.getElementById('formError');
-
-  if(!nome || !email){ errorEl.textContent='⚠️ Inserisci almeno nome e email.'; errorEl.style.display='block'; return; }
-  
-  successEl.style.display='none';
-  errorEl.style.display='none';
-  btnEl.disabled=true; btnEl.textContent='Invio in corso...';
-
-  try {
-    const res = await fetch(`${SUPA_URL}/rest/v1/richieste_adesione`, {
-      method: 'POST',
-      headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}`, 'Content-Type': 'application/json', 'Prefer': 'return=minimal' },
-      body: JSON.stringify({ nome, email, telefono, socio_ana: socio, gruppo_ana: gruppo, messaggio })
-    });
-    if(res.ok){
-      successEl.style.display='block';
-      // Reset form
-      document.querySelector('#aderire input[placeholder="Nome e Cognome *"]').value='';
-      document.querySelector('#aderire input[type="email"]').value='';
-      document.querySelector('#aderire input[type="tel"]').value='';
-      document.getElementById('socioAna').value='';
-      document.getElementById('gruppoField').style.display='none';
-      document.querySelector('#aderire textarea').value='';
-    } else { errorEl.style.display='block'; }
-  } catch(e){ errorEl.style.display='block'; }
-  
-  btnEl.disabled=false; btnEl.textContent='Invia richiesta';
-}
-
-async function openRichieste(){
-  document.getElementById('areaInterna').classList.remove('active');
-  document.getElementById('richiestePanel').classList.add('active');
-  await caricaRichieste();
-}
-
-async function caricaRichieste(){
-  const list = document.getElementById('richiesteList');
-  list.innerHTML = '<p style="color:var(--testo-ch);font-size:0.85rem">⏳ Caricamento...</p>';
-  try {
-    const res = await fetch(`${SUPA_URL}/rest/v1/richieste_adesione?select=*&order=created_at.desc`, {
-      headers: { 'apikey': SUPA_KEY, 'Authorization': `Bearer ${SUPA_KEY}` }
-    });
-    const richieste = await res.json();
-    
-    // Update badge
-    const nonLette = richieste.filter(r => !r.letta).length;
-    const badge = document.getElementById('badgeRichieste');
-    if(nonLette > 0){ badge.textContent = nonLette; badge.style.display='inline'; }
-    else { badge.style.display='none'; }
-
-    if(!richieste.length){ list.innerHTML='<p style="color:var(--testo-ch);font-size:0.85rem">Nessuna richiesta ricevuta.</p>'; return; }
-    
-    list.innerHTML='';
-    richieste.forEach(r => {
-      const data = new Date(r.created_at).toLocaleDateString('it-IT', {day:'2-digit',month:'2-digit',year:'numeric'});
-      const div = document.createElement('div');
-      div.style.cssText = `background:${r.letta ? 'var(--crema)' : 'var(--blu-pale)'}; border-radius:14px; padding:1rem 1.2rem; margin-bottom:0.8rem; border-left:3px solid ${r.letta ? 'var(--verde-pale)' : 'var(--blu)'}`;
-      div.innerHTML = `
-        <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.5rem">
-          <div>
-            <strong style="font-size:0.95rem;color:var(--blu)">${r.nome}</strong>
-            ${!r.letta ? '<span style="font-size:0.65rem;font-weight:800;background:var(--blu);color:white;border-radius:10px;padding:1px 7px;margin-left:6px">NUOVA</span>' : ''}
-          </div>
-          <span style="font-size:0.72rem;color:var(--testo-ch)">${data}</span>
-        </div>
-        <div style="font-size:0.82rem;color:var(--testo-ch);line-height:1.6">
-          <div>📧 ${r.email}${r.telefono ? ' · 📞 '+r.telefono : ''}</div>
-          ${r.socio_ana ? '<div>👤 Socio ANA: '+r.socio_ana+(r.gruppo_ana ? ' — '+r.gruppo_ana : '')+'</div>' : ''}
-          ${r.messaggio ? '<div style="margin-top:0.4rem;font-style:italic">"'+r.messaggio+'"</div>' : ''}
-        </div>
-        <div style="margin-top:0.7rem;display:flex;gap:0.5rem">
-          ${!r.letta ? '<button class="btn-sm btn-ok" onclick="segnaLetta(''+r.id+'')">Segna come letta</button>' : '<span style="font-size:0.72rem;color:var(--testo-ch)">✓ Letta</span>'}
-          <button class="btn-sm btn-danger" onclick="eliminaRichiesta(''+r.id+'')">Elimina</button>
-        </div>`;
-      list.appendChild(div);
-    });
-  } catch(e){ list.innerHTML='<p style="color:red;font-size:0.85rem">⚠️ Errore nel caricamento.</p>'; }
-}
-
-async function segnaLetta(id){
-  await fetch(`${SUPA_URL}/rest/v1/richieste_adesione?id=eq.${id}`, {
-    method:'PATCH',
-    headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`,'Content-Type':'application/json'},
-    body: JSON.stringify({letta:true})
-  });
-  await caricaRichieste();
-}
-
-async function eliminaRichiesta(id){
-  if(!confirm('Eliminare questa richiesta?')) return;
-  await fetch(`${SUPA_URL}/rest/v1/richieste_adesione?id=eq.${id}`, {
-    method:'DELETE',
-    headers:{'apikey':SUPA_KEY,'Authorization':`Bearer ${SUPA_KEY}`}
-  });
-  await caricaRichieste();
-}
-
-function toggleGruppo(){
+function toggleGruppo() {
   const val = document.getElementById('socioAna').value;
   document.getElementById('gruppoField').style.display = val === 'si' ? 'block' : 'none';
 }
 
-function toggleMenu(){
-  const nav = document.getElementById('navLinks');
-  const btn = document.getElementById('hamburger');
-  nav.classList.toggle('open');
-  btn.classList.toggle('open');
+const SUPA_URL = 'https://pggtmyarpuztfewqgwyc.supabase.co';
+const SUPA_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InBnZ3RteWFycHV6dGZld3Fnd3ljIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMwNDk4MjksImV4cCI6MjA4ODYyNTgyOX0.NqhNcmN-tqv5XWyeokSkjvOM6PxnmlDtZNcADeHRp9c';
+const HJ = { 'apikey': SUPA_KEY, 'Authorization': 'Bearer ' + SUPA_KEY, 'Content-Type': 'application/json' };
+
+async function inviaRichiesta() {
+  const nome = document.querySelector('#aderire input[placeholder="Nome e Cognome *"]').value.trim();
+  const email = document.querySelector('#aderire input[type="email"]').value.trim();
+  const telefono = document.querySelector('#aderire input[type="tel"]').value.trim();
+  const socio = document.getElementById('socioAna').value;
+  const gruppoEl = document.getElementById('gruppoAna');
+  const gruppo = gruppoEl ? gruppoEl.value.trim() : '';
+  const messaggio = document.querySelector('#aderire textarea').value.trim();
+  const btnEl = document.getElementById('btnInvia');
+  const successEl = document.getElementById('formSuccess');
+  const errorEl = document.getElementById('formError');
+  if (!nome || !email) { errorEl.textContent = 'Inserisci almeno nome e email.'; errorEl.style.display = 'block'; return; }
+  successEl.style.display = 'none'; errorEl.style.display = 'none';
+  btnEl.disabled = true; btnEl.textContent = 'Invio in corso...';
+  try {
+    const res = await fetch(SUPA_URL + '/rest/v1/richieste_adesione', {
+      method: 'POST',
+      headers: Object.assign({}, HJ, { 'Prefer': 'return=minimal' }),
+      body: JSON.stringify({ nome: nome, email: email, telefono: telefono, socio_ana: socio, gruppo_ana: gruppo, messaggio: messaggio })
+    });
+    if (res.ok) {
+      successEl.style.display = 'block';
+      document.querySelector('#aderire input[placeholder="Nome e Cognome *"]').value = '';
+      document.querySelector('#aderire input[type="email"]').value = '';
+      document.querySelector('#aderire input[type="tel"]').value = '';
+      document.getElementById('socioAna').value = '';
+      document.getElementById('gruppoField').style.display = 'none';
+      document.querySelector('#aderire textarea').value = '';
+    } else { errorEl.style.display = 'block'; }
+  } catch(e) { errorEl.style.display = 'block'; }
+  btnEl.disabled = false; btnEl.textContent = 'Invia richiesta';
 }
-// Close menu on link click
-document.addEventListener('DOMContentLoaded', function(){
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    a.addEventListener('click', () => {
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.nav-links a').forEach(function(a) {
+    a.addEventListener('click', function() {
       document.getElementById('navLinks').classList.remove('open');
       document.getElementById('hamburger').classList.remove('open');
     });
   });
-});
-
-document.addEventListener('keydown', function(e){
-  if(e.key==='Escape') closeModal();
-  if(e.key==='Enter' && document.getElementById('loginModal').classList.contains('active')){
-    if(document.getElementById('loginForm').classList.contains('active')) doLogin();
-  }
 });
 </script>
 </body>
